@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className='py-3 bg-secondary text-white'>
             <div className="container">
-                <span>Cozore Store</span>
+                <span>Zomcore.</span>
             </div>
         </footer>
     );
