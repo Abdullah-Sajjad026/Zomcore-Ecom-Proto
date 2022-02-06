@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Homepage from './components/Homepage';
 import Cartpage from './components/Cartpage';
 import Productspage from './components/Productspage';
+import AuthenticationPage from './components/AuthenticationPage';
 import { ProductsCtx, IsPendingCtx, CartCtx } from './components/Context';
 import faker from 'faker';
 import { useEffect, useState } from 'react';
@@ -12,15 +13,6 @@ import { useEffect, useState } from 'react';
 faker.seed(100);
 
 function App() {
-
-  // const productsArray = [...Array(20)].map(() => {
-  //   return {
-  //     id: faker.datatype.uuid(),
-  //     name: faker.commerce.productName(),
-  //     price: faker.commerce.price(),
-  //     image: faker.random.image(),
-  //   }
-  // })
 
   const [products, setProducts] = useState([]);
   const [isPending, setIsPending] = useState(true);
@@ -56,6 +48,7 @@ function App() {
                 <Route path={'/'} exact component={Homepage} />
                 <Route path={'/cart'} exact component={Cartpage} />
                 <Route path={'/products'} exact component={Productspage} />
+                <Route path={'/auth/:mode'} exact component={AuthenticationPage} />
               </Switch>
 
             </IsPendingCtx.Provider>

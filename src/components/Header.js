@@ -12,9 +12,12 @@ const Header = () => {
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-warning p-3">
             <div className="container">
                 <Link className='navbar-brand' to={'/'}>Zomcore.</Link>
-                <HashLink className='nav-icon position-relative"' to='/cart#top'> <FaShoppingCart />
-                    <span className="badge rounded-pill bg-light text-dark">{cart.length}</span>
-                </HashLink>
+                <div className='d-flex align-items-center'>
+                    <HashLink className='nav-icon position-relative"' to='/cart#top'> <FaShoppingCart />
+                        <span className="badge rounded-pill bg-light text-dark">{cart.length}</span>
+                    </HashLink>
+                    <Link to={'/auth/signin'} className='ms-4 btn btn-info text-white' >Sign In</Link>
+                </div>
             </div>
         </nav>
     );

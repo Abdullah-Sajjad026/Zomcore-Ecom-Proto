@@ -99,7 +99,8 @@ body {
     }
 }
 
-.cartpage {
+.cartpage,
+.authpage {
     display: grid;
     place-items: center;
     padding: 5rem 0;
@@ -107,9 +108,16 @@ body {
 
 }
 
-.cartpage-main {
+.cartpage-main,
+.authpage-main {
     background-color: white;
     margin: 0 2%;
+}
+
+.authpage-main {
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 3rem 2rem;
 }
 
 .cart-product img {
