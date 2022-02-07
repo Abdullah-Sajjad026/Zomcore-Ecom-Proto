@@ -6,7 +6,7 @@ import Homepage from './components/Homepage';
 import Cartpage from './components/Cartpage';
 import Productspage from './components/Productspage';
 import AuthenticationPage from './components/AuthenticationPage';
-import { ProductsCtx, IsPendingCtx, CartCtx } from './components/Context';
+import { ProductsCtx, IsPendingCtx, CartCtx, UsersCtx, CurrentUserCtx } from './components/Context';
 import faker from 'faker';
 import { useEffect, useState } from 'react';
 
@@ -18,11 +18,17 @@ function App() {
   const [isPending, setIsPending] = useState(true);
   const [cart, setCart] = useState([]);
 
+  const [users, setUsers] = useState(() => {
+    return localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : []
+  })
+  const [currentUser, setCurrentUser] = useState({});
+
   const getProducts = async () => {
     const response = await fetch('https://fakestoreapi.com/products');
     const data = await response.json();
     return data;
   }
+
   useEffect(() => {
     getProducts()
       .then(data => {
@@ -38,21 +44,25 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <CartCtx.Provider value={[cart, setCart]} >
-          <Header />
+          <CurrentUserCtx.Provider value={[currentUser, setCurrentUser]}>
 
-          <ProductsCtx.Provider value={products}>
-            <IsPendingCtx.Provider value={isPending}>
+            <Header />
+            <UsersCtx.Provider value={[users, setUsers]}>
+              <ProductsCtx.Provider value={products}>
+                <IsPendingCtx.Provider value={isPending}>
 
 
-              <Switch>
-                <Route path={'/'} exact component={Homepage} />
-                <Route path={'/cart'} exact component={Cartpage} />
-                <Route path={'/products'} exact component={Productspage} />
-                <Route path={'/auth/:mode'} exact component={AuthenticationPage} />
-              </Switch>
+                  <Switch>
+                    <Route path={'/'} exact component={Homepage} />
+                    <Route path={'/cart'} exact component={Cartpage} />
+                    <Route path={'/products'} exact component={Productspage} />
+                    <Route path={'/auth/:mode'} exact component={AuthenticationPage} />
+                  </Switch>
 
-            </IsPendingCtx.Provider>
-          </ProductsCtx.Provider>
+                </IsPendingCtx.Provider>
+              </ProductsCtx.Provider>
+            </UsersCtx.Provider>
+          </CurrentUserCtx.Provider>
         </CartCtx.Provider>
 
         <Footer />
