@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Homepage from './components/Homepage';
 import Cartpage from './components/Cartpage';
 import Productspage from './components/Productspage';
-import AuthenticationPage from './components/AuthenticationPage';
+import UserPage from './components/UserPage';
 import { ProductsCtx, IsPendingCtx, CartCtx, UsersCtx, CurrentUserCtx } from './components/Context';
 import faker from 'faker';
 import { useEffect, useState } from 'react';
@@ -21,7 +21,10 @@ function App() {
   const [users, setUsers] = useState(() => {
     return localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : []
   })
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(() => {
+    const currentUser = sessionStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser) : undefined;
+  });
 
   const getProducts = async () => {
     const response = await fetch('https://fakestoreapi.com/products');
@@ -35,7 +38,6 @@ function App() {
         setProducts(data.map((product) => ({ ...product, qty: 1 })));
         setIsPending(false);
       });
-
   }, []);
 
 
@@ -47,6 +49,7 @@ function App() {
           <CurrentUserCtx.Provider value={[currentUser, setCurrentUser]}>
 
             <Header />
+
             <UsersCtx.Provider value={[users, setUsers]}>
               <ProductsCtx.Provider value={products}>
                 <IsPendingCtx.Provider value={isPending}>
@@ -56,7 +59,7 @@ function App() {
                     <Route path={'/'} exact component={Homepage} />
                     <Route path={'/cart'} exact component={Cartpage} />
                     <Route path={'/products'} exact component={Productspage} />
-                    <Route path={'/auth/:mode'} exact component={AuthenticationPage} />
+                    <Route path={'/user/:mode'} exact component={UserPage} />
                   </Switch>
 
                 </IsPendingCtx.Provider>

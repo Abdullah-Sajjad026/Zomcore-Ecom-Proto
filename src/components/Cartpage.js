@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import CartProduct from './CartProduct';
-import { CartCtx } from './Context';
+import { CartCtx, CurrentUserCtx } from './Context';
 
 
 const Cartpage = () => {
 
     const [cart] = useContext(CartCtx);
+    const [currentUser] = useContext(CurrentUserCtx);
+
     const subTotal = cart.reduce((acc, curr) => acc + Number(curr.price * curr.qty), 0)
     const taxPrice = cart.reduce((acc, curr) => acc + Number(curr.qty * (curr.price * (3 / 100))), 0)
     const totalPrice = cart.reduce((acc, curr) => acc + Number(curr.price * curr.qty), taxPrice)
@@ -17,29 +19,39 @@ const Cartpage = () => {
 
                     <div className="col-md-6 py-5 px-4">
                         <h2 className='mb-5'>Billing Address</h2>
-                        <form>
-                            <div className="row g-3 mb-3 align-items-center">
-                                <div className="col-md-6">
-                                    <label htmlFor="firstName" className="form-label">First Name </label>
-                                    <input type="text" className="form-control" id="firstName" required />
+
+                        {currentUser ? <>
+
+                            <form>
+                                <div className="row g-3 mb-3 align-items-center">
+                                    <div className="col-md-6">
+                                        <label htmlFor="firstName" className="form-label">First Name </label>
+                                        <input type="text" className="form-control" id="firstName" required />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label htmlFor="lastName" className="form-label">Last Name </label>
+                                        <input type="text" className="form-control" id="lastName" required />
+                                    </div>
                                 </div>
-                                <div className="col-md-6">
-                                    <label htmlFor="lastName" className="form-label">Last Name </label>
-                                    <input type="text" className="form-control" id="lastName" required />
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email Address</label>
+                                    <input type="email" className="form-control" id="email" />
                                 </div>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email Address</label>
-                                <input type="email" className="form-control" id="email" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="streetAddress" className="form-label">Street Address</label>
-                                <textarea className="form-control" id="streetAddress" />
-                            </div>
+                                <div className="mb-3">
+                                    <label htmlFor="streetAddress" className="form-label">Street Address</label>
+                                    <textarea className="form-control" id="streetAddress" />
+                                </div>
 
 
-                            <button type="submit" className="mt-3 btn btn-primary">Place Order</button>
-                        </form>
+                                <button type="submit" className="mt-3 btn btn-primary">Place Order</button>
+                            </form>
+
+                        </> : <div class="alert alert-warning" role="alert">
+                            Please sign in to place order.
+                        </div>
+
+                        }
+
                     </div>
                     <div className="col-md-6 py-5 px-4">
                         <h2 className='mb-5'>Cart</h2>

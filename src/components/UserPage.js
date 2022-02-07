@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import SignInForm from './SignInForm';
+import UserProfile from './UserProfile';
 
-const AuthenticationPage = () => {
+const UserPage = () => {
 
     const { mode } = useParams();
 
@@ -13,11 +14,13 @@ const AuthenticationPage = () => {
         <main className='authpage bg-light'>
             <div className="container">
                 <div className="authpage-main rounded-3 row">
-                    {mode === 'signin' ? <SignInForm /> : <RegisterForm />}
+                    {mode === 'signin' && <SignInForm />}
+                    {mode === 'register' && <RegisterForm />}
+                    {mode === 'profile' && <UserProfile />}
                 </div>
             </div>
         </main>
     );
 };
 
-export default AuthenticationPage;
+export default UserPage;
