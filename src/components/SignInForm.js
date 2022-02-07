@@ -31,7 +31,7 @@ const SignInForm = () => {
             passwordRef.current.value = '';
             titleRef.current.innerText = 'Sign In Successful. You can continue now.'
             titleRef.current.className = 'alert alert-success'
-            fieldSetRef.current.setAttribute('disabled', '');
+            fieldSetRef.current.className = 'd-none';
             regDivRef.current.className = 'd-none';
 
         } else {

@@ -122,4 +122,5 @@ body {
 
 .cart-product img {
     width: 86%;
+    min-width: 50px;
 }

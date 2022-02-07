@@ -9,6 +9,7 @@ const RegisterForm = () => {
     const lNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
+    const telRef = useRef();
     const titleRef = useRef();
     const fieldSetRef = useRef();
 
@@ -20,6 +21,7 @@ const RegisterForm = () => {
         lNameRef.current.value = '';
         emailRef.current.value = '';
         passwordRef.current.value = '';
+        telRef.current.value = '';
 
     }
     const registerUser = (e) => {
@@ -30,7 +32,10 @@ const RegisterForm = () => {
             lName: lNameRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
+            tel: telRef.current.value,
+            orders: []
         }
+
         users.find((member) => member.email === newUser.email) ? alert('An user is already registered with this email.') : setUsers([...users, newUser]);
     }
     useEffect(() => {
@@ -41,9 +46,8 @@ const RegisterForm = () => {
         localStorage.setItem('users', JSON.stringify(users));
         clearForm();
         titleRef.current.innerText = 'Registeration Successful. Sign in to continue.'
+        titleRef.current.className = 'alert alert-success'
         fieldSetRef.current.className = 'd-none';
-
-
     }, [users])
 
 
@@ -65,6 +69,11 @@ const RegisterForm = () => {
                 <div className="mb-4">
                     <label for="email" className="form-label">Email address</label>
                     <input type="email" name='email' className="form-control" id="email" aria-describedby="emailHelp" required ref={emailRef} />
+                </div>
+                <div className="mb-4">
+                    <label for="telephone" className="form-label">Phone Number</label>
+                    <input type="tel" pattern='+[0-9]{2}-[0-9]{10}' name='telephone' className="form-control" id="telephone" required ref={telRef} />
+                    <small>Format: +xx-xxxxxxxxxx</small>
                 </div>
                 <div className="mb-4">
                     <label for="password" className="form-label">Password</label>
