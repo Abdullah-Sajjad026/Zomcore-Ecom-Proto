@@ -27,9 +27,7 @@ const SignInForm = () => {
             sessionStorage.setItem('currentUser', JSON.stringify(exist));
             setCurrentUser(exist);
             window.history.replaceState(null, document.title, "/")
-            emailRef.current.value = '';
-            passwordRef.current.value = '';
-            titleRef.current.innerText = 'Sign In Successful. You can continue now.'
+            titleRef.current.innerText = 'Sign In Successful. Happy Shopping.'
             titleRef.current.className = 'alert alert-success'
             fieldSetRef.current.className = 'd-none';
             regDivRef.current.className = 'd-none';

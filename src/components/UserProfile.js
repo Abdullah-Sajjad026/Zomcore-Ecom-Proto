@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserCtx } from './Context';
+import SingleOrder from './SingleOrder';
 
 const UserProfile = () => {
     const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
+
 
     const logoutUser = () => {
         sessionStorage.removeItem('currentUser');
@@ -36,7 +38,16 @@ const UserProfile = () => {
                     <span className='me-3'>Password:</span>
                     <h4 className='m-0'>{currentUser.password}</h4>
                 </div>
-                <Link to={'/'} className='btn btn-info text-white' onClick={logoutUser}>Logout</Link>
+            </div>
+            <div>
+                <h3 className='mt-3 mb-5 text-primary'>You Orders </h3>
+                <div>
+
+                    {currentUser.orders.map(order => <SingleOrder order={order} key={order.dateTime} />)}
+                </div>
+            </div>
+            <div>
+                <Link to={'/'} className='d-inline-block btn btn-info text-white mt-4' onClick={logoutUser}>Logout</Link>
 
             </div>
         </>

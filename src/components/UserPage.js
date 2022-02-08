@@ -11,9 +11,9 @@ const UserPage = () => {
 
 
     return (
-        <main className='authpage bg-light'>
+        <main className='userpage bg-light'>
             <div className="container">
-                <div className="authpage-main rounded-3 row">
+                <div className="userpage-main rounded-3 row">
                     {mode === 'signin' && <SignInForm />}
                     {mode === 'register' && <RegisterForm />}
                     {mode === 'profile' && <UserProfile />}

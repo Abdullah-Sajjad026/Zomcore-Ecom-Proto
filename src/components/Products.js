@@ -9,7 +9,9 @@ const Products = () => {
 
     return (
         <>
-            {gettingProducts && <div className='p-5 text-center display-3'>Loading ...</div>}
+            {gettingProducts && <div className='p-5 text-center display-3'>Loading ... <br /> <div className="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div></div>}
             {!gettingProducts && <div className='py-5'>
                 <div className="container">
                     <div className="title-box py-5">
