@@ -1,15 +1,44 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { CurrentUserCtx } from './Context';
+import { CurrentUserCtx, UsersCtx } from './Context';
 import SingleOrder from './SingleOrder';
 
 const UserProfile = () => {
     const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
+    const [users, setUsers] = useContext(UsersCtx);
 
+    const deleteOrdersHistory = () => {
+        const thisUser = users.find(member => member.email === currentUser.email);
+        thisUser.orders = [];
+
+        // creatng a new array of users without this user
+        const filteredUsers = users.filter(member => member.email !== thisUser.email);
+
+        // adding this user to filteredUsers
+        const updatedUsers = [...filteredUsers, thisUser];
+
+        // updating localStorage users with updatedUsers
+        sessionStorage.setItem('currentUser', JSON.stringify(thisUser));
+        setCurrentUser(thisUser);
+
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        setUsers(updatedUsers)
+
+
+    }
 
     const logoutUser = () => {
         sessionStorage.removeItem('currentUser');
         setCurrentUser(undefined);
+    }
+    const deleteUser = () => {
+        //getting currentUser
+        const filteredUsers = users.filter(member => member.email !== currentUser.email);
+        //updating in localStoage
+        localStorage.setItem('users', JSON.stringify(filteredUsers));
+        //changing users state
+        setUsers(filteredUsers);
+        logoutUser();
     }
 
     return (
@@ -42,11 +71,18 @@ const UserProfile = () => {
             <div>
                 <h3 className='mt-3 mb-5 text-primary'>You Orders </h3>
                 <div>
-
-                    {currentUser.orders.map(order => <SingleOrder order={order} key={order.dateTime} />)}
+                    {currentUser.orders.length !== 0 && <>
+                        {currentUser.orders.map(order => <SingleOrder order={order} key={order.dateTime} />)}
+                        <Link to={'/'} className='d-inline-block btn text-danger mt-4 text-decoration-underline' onClick={deleteOrdersHistory} >Delete Orders History</Link>
+                    </>
+                    }
+                    {currentUser.orders.length === 0 && (<p>No orders history found.</p>)}
                 </div>
+
+
             </div>
             <div>
+                <Link to={'/'} className='d-inline-block btn text-danger mt-4 border border-danger border-1 me-3' onClick={deleteUser}>Delete Account</Link>
                 <Link to={'/'} className='d-inline-block btn btn-info text-white mt-4' onClick={logoutUser}>Logout</Link>
 
             </div>
