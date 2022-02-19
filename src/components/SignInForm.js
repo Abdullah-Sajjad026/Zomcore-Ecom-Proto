@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { CurrentUserCtx, UsersCtx } from './Context';
 
 const SignInForm = () => {
-
     const [users, setUsers] = useContext(UsersCtx);
     const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
 

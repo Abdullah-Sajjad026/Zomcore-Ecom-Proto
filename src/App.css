@@ -71,8 +71,23 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+}
 
+.skeleton--product-card {
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25rem;
+    padding: 1.5rem 1rem;
+    background-color: white;
+    text-align: center;
+}
 
+.skeleton--product-img {
+    max-width: 85%;
+    height: 15rem;
+}
+
+.skeleton--product-body {
+    padding: 3rem .4rem 1.5rem .4rem;
 }
 
 
