@@ -17,17 +17,22 @@ const RegisterForm = () => {
 
     const registerUser = (e) => {
         e.preventDefault();
-        const newUser = {
-            id: users.length,
-            fName: fNameRef.current.value,
-            lName: lNameRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            tel: telRef.current.value,
-            orders: []
+        const [fName, lName, email, password, tel] = [fNameRef.current.value, lNameRef.current.value, emailRef.current.value, passwordRef.current.value, telRef.current.value]
+        if (fName === '' || lName === '' || email === '' || password === '', tel === '') {
+            alert('Please provide valid details for all input fields.')
+            return;
+        } else {
+            const newUser = {
+                id: users.length,
+                fName,
+                lName,
+                email,
+                password,
+                tel,
+                orders: []
+            }
+            users.find((member) => member.email === newUser.email) ? alert('An user is already registered with this email.') : setUsers([...users, newUser]);
         }
-
-        users.find((member) => member.email === newUser.email) ? alert('An user is already registered with this email.') : setUsers([...users, newUser]);
     }
 
     useEffect(() => {
