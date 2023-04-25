@@ -10,20 +10,20 @@ const Hero = () => {
             </div>
             <div className="carousel-inner">
 
-                <div className="carousel-item active" data-bs-interval="1000">
-                    <img src="https://preview.colorlib.com/theme/cozastore/images/xslide-02.jpg.pagespeed.ic.__MQeyG5T4.webp" className="d-block w-100" alt="..." />
+                <div className="carousel-item active" data-bs-interval="3000">
+                    <img src="https://images.pexels.com/photos/167703/pexels-photo-167703.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-block">
                         <h5>New Arrivals</h5>
                     </div>
                 </div>
-                <div className="carousel-item" data-bs-interval="1000">
-                    <img src="https://preview.colorlib.com/theme/cozastore/images/xslide-03.jpg.pagespeed.ic.tP-L47NU9M.webp" className="d-block w-100" alt="..." />
+                <div className="carousel-item" data-bs-interval="3000">
+                    <img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-block">
                         <h5>Premium Quality</h5>
                     </div>
                 </div>
-                <div className="carousel-item " data-bs-interval="1000">
-                    <img src="https://preview.colorlib.com/theme/cozastore/images/xslide-01.jpg.pagespeed.ic.XotvXKn0Mi.webp" className="d-block w-100" alt="..." />
+                <div className="carousel-item " data-bs-interval="3000">
+                    <img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-block">
                         <h5>Women's Collection</h5>
 
