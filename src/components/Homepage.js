@@ -5,7 +5,7 @@ import Products from './Products';
 const Homepage = () => {
     return (
         <main>
-            <Hero />
+        {/* <Hero /> */}
             <Products />
         </main>
     );
